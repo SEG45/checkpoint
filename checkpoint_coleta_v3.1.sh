@@ -129,7 +129,7 @@ main() {
 	writeLog "Fim da coleta."
 
 	echo
-	read -p "Deseja enviar o arquivo gerado para o servidor suporte.com.br? (s/n): " resposta
+	read -p "Deseja enviar o arquivo gerado para o servidor suporte.cg-one.com? (s/n): " resposta
 
 	if [ "$resposta" = "s" ] || [ "$resposta" = "S" ]; then
 		# Solicita usuário e senha apenas se resposta for SIM
@@ -138,7 +138,7 @@ main() {
 		echo
 
 		ARQ="ColetaCG_`hostname`.tar"
-		echo "Enviando $ARQ para suporte.com.br ..."
+		echo "Enviando $ARQ para suporte.cg-one.com ..."
 
 		# Cria um arquivo temporário com os comandos do SFTP
 		TMPFILE=$(mktemp)
@@ -147,10 +147,10 @@ main() {
 
 		# Verifica se sshpass está disponível
 		if command -v sshpass >/dev/null 2>&1; then
-			sshpass -p "$sftp_pass" sftp -oBatchMode=no -oStrictHostKeyChecking=no "$sftp_user@suporte.com.br" < $TMPFILE
+			sshpass -p "$sftp_pass" sftp -oBatchMode=no -oStrictHostKeyChecking=no "$sftp_user@suporte.cg-one.com" < $TMPFILE
 			if [ $? -eq 0 ]; then
-				echo "✅ Arquivo enviado com sucesso para suporte.com.br!"
-				writeLog "Arquivo $ARQ enviado com sucesso para suporte.com.br"
+				echo "✅ Arquivo enviado com sucesso para suporte.cg-one.com!"
+				writeLog "Arquivo $ARQ enviado com sucesso para suporte.cg-one.com"
 			else
 				echo "❌ Falha ao enviar o arquivo via SFTP."
 				writeLog "Falha ao enviar o arquivo $ARQ via SFTP"
